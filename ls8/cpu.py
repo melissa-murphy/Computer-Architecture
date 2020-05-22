@@ -34,9 +34,9 @@
 #                 comment_split = line.split('#')
 
 #                 # convert binary to int
-#                 num = comment_split[0].strip()
+#                 number = comment_split[0].strip()
 #                 try:
-#                     x = int(num, 2)
+#                     x = int(number, 2)
 #                 except ValueError:
 #                     print('ValueError')
 
@@ -227,11 +227,11 @@ class CPU:
                     # find and ignore anything following #
                     comment_split = line.split('#')
                     # convert binary to int
-                    num = comment_split[0].strip()
-                    if num == "":
+                    number = comment_split[0].strip()
+                    if number == "":
                         continue
 
-                    value = int(num, 2)
+                    value = int(number, 2)
 
                     self.ram_write(value, address)
 
@@ -264,8 +264,8 @@ class CPU:
             self.reg[reg_a] += self.reg[reg_b]
         # elif op == "SUB": etc
         elif op == "MUL":
-            self.reg[reg_a] = (self.reg[reg_a] * (self.reg[reg_b]))
-
+            self.reg[reg_a] = (self.reg[reg_a]) * (self.reg[reg_b])
+        
         else:
             raise Exception("Unsupported ALU operation")
 
