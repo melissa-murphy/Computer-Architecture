@@ -215,22 +215,20 @@ class CPU:
     def jne(self, operand_a, operand_b):
         pass
 
-    def load(self):
+    def load(self, program):
         """Load a program into memory."""
-
-        address = 0
-        program = sys.argv[1]
+        print("loading....")
 
         try:
+            address = 0
+            
             with open(program) as f:
-                count = 0
                 for line in f:
-                    count += 1
-                # find and ignore anything following #
-                comment_split = line.split('#')
+                    # find and ignore anything following #
+                    comment_split = line.split('#')
 
-                # convert binary to int
-                num = comment_split[0].strip()
+                    # convert binary to int
+                    num = comment_split[0].strip()
                 try:
                     x = int(num, 2)
                 except ValueError:
