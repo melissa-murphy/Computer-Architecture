@@ -221,24 +221,24 @@ class CPU:
 
         try:
             address = 0
-            
+
             with open(program) as f:
                 for line in f:
                     # find and ignore anything following #
                     comment_split = line.split('#')
-
                     # convert binary to int
                     num = comment_split[0].strip()
-                try:
-                    x = int(num, 2)
-                except ValueError:
-                    print('ValueError')
+                    if num == "":
+                        continue
 
-                self.ram[address] = x
-                address += 1
+                    value = int(num, 2)
+
+                    self.ram_write(value, address)
+
+                    address += 1
 
         except FileNotFoundError:
-            print(f"{sys.argv[0]}: {sys.argv[1]} not found")
+            print(f"{program} not found")
             sys.exit(2)
 
         # For now, we've just hardcoded a program:
@@ -263,6 +263,9 @@ class CPU:
         if op == "ADD":
             self.reg[reg_a] += self.reg[reg_b]
         # elif op == "SUB": etc
+        elif op == "MUL":
+            self.reg[reg_a] = (self.reg[reg_a] * (self.reg[reg_b]))
+
         else:
             raise Exception("Unsupported ALU operation")
 
